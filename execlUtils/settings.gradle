@@ -1,0 +1,3 @@
+rootProject.name='ExeclUtils'
+include ':app'
+include ':execlutils'
