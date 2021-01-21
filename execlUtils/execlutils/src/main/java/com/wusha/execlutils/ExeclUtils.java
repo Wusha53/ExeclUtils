@@ -1,6 +1,8 @@
 package com.wusha.execlutils;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,11 +16,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ExeclUtils {
@@ -179,4 +184,42 @@ public class ExeclUtils {
         }
         return value;
     }
+
+    /**
+     * 此方法为删除execl表格中的一行
+     * 开始行数从1开始.
+     * 结束行数建议写最大行数,不然中间会出现空缺.(有时间在更改)
+     * @param fileName 文件地址
+     * @param startRow 开始的行数
+     * @param endRow   结束的行数
+     * @throws Exception
+     */
+    public static void removeColumn(String fileName, int startRow, int endRow) throws Exception {
+
+        InputStream inputStream = null;
+        inputStream = new FileInputStream(fileName);
+        Workbook workbook = null;
+        if (fileName.endsWith(".xls")) {
+            workbook = new HSSFWorkbook(inputStream);
+        } else if (fileName.endsWith(".xlsx")) {
+            workbook = new XSSFWorkbook(inputStream);
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+
+        int rowsCount = sheet.getPhysicalNumberOfRows();
+        if (sheet == null) {
+            return;
+        }
+        sheet.shiftRows(startRow, endRow, -1);
+
+        FileOutputStream os = new FileOutputStream(fileName);
+
+        workbook.write(os);
+
+        inputStream.close();
+
+        os.close();
+
+    }
+
 }
