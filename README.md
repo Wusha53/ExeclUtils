@@ -5,4 +5,29 @@
   2.使用xls数据流:ExeclUtils.ReadExcelUtilsXLS(InputStream),
   3.使用xlsx或者xls文件名字<带后缀>ExeclUtils.ReadExcelUtils(String fileName)
   4.使用CSV数据流或者文件名字ExeclUtils.ReadExcelUtilsCSV(InputStream  <或者> String fileName)
+  /**
+     * 此方法为删除execl表格中的一行
+     * 开始行数从1开始.
+     * 结束行数建议写最大行数,不然中间会出现空缺.(有时间在更改)
+     * @param fileName 文件地址
+     * @param startRow 开始的行数
+     * @param endRow   结束的行数
+     * @throws Exception
+     */
+  5.新增删除功能removeColumn(String fileName, int startRow, int endRow)
   后续功能可能会持续更新
+
+
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        implementation 'com.github.qq331617870:ExeclUtils:Tag'
+	}
