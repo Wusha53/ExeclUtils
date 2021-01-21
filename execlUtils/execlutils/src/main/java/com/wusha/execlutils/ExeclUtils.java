@@ -73,7 +73,11 @@ public class ExeclUtils {
             int cellsCount = row.getPhysicalNumberOfCells();
             for (int c = 0; c < cellsCount; c++) {
                 String value = getCellAsString(row, c, formulaEvaluator);
-                cellInfo = cellInfo + value;
+                if (cellInfo.equals("")){
+                    cellInfo=value;
+                }else {
+                    cellInfo = cellInfo +","+ value;
+                }
 
             }
         }
@@ -104,7 +108,11 @@ public class ExeclUtils {
             int cellsCount = row.getPhysicalNumberOfCells();
             for (int c = 0; c < cellsCount; c++) {
                 String value = getCellAsString(row, c, formulaEvaluator);
-                cellInfo = cellInfo + value;
+                if (cellInfo.equals("")){
+                    cellInfo=value;
+                }else {
+                    cellInfo = cellInfo +","+ value;
+                }
 
             }
         }
@@ -129,7 +137,12 @@ public class ExeclUtils {
             int cellsCount = row.getPhysicalNumberOfCells();
             for (int c = 0; c < cellsCount; c++) {
                 String value = getCellAsString(row, c, formulaEvaluator);
-                cellInfo = cellInfo + value;
+                if (cellInfo.equals("")){
+                    cellInfo=value;
+                }else {
+                    cellInfo = cellInfo +","+ value;
+                }
+
 
             }
         }
