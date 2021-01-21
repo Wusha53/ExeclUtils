@@ -21,13 +21,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        lintConfig file("path-to-lint.xml")
+    }
 
 }
-
+task makeJar(type:Copy) {
+//删除存在的jar
+    delete "build/lib/test.jar"
+//设置拷贝文件
+    from("build/intermediates/bundles/release")
+//打进jar后文件目录
+    into("build/libs/")
+//将classes.jar放入build/libs目录下
+//include,exclude参数来设置过滤
+    include("classes.jar")
+//重命名为test.jar
+    rename("classes.jar","test.jar")
+}
+makeJar.dependsOn(build)
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation files('libs/poi-3.12-android-a.jar')
