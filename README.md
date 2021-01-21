@@ -1,4 +1,6 @@
-# ExeclUtils
+# ExeclUtils  	
+[![](https://jitpack.io/v/qq331617870/ExeclUtils.svg)](https://jitpack.io/#qq331617870/ExeclUtils)
+
 这是一个使用POI来查看Execl的工具类.返回格式为List<String>.有需求可以自己更改.暂时只支持CSV,XLS XLSX 格式读取
 使用方法
 	
@@ -29,5 +31,5 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.qq331617870:ExeclUtils:1.3'
+	        implementation 'com.github.qq331617870:ExeclUtils:Tag'
 	}
