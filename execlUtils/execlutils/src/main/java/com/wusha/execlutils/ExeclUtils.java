@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -221,5 +222,49 @@ public class ExeclUtils {
         os.close();
 
     }
+
+    /**
+     * 获取最大行
+     * @param fileName
+     * @return
+     * @throws Exception
+     */
+    public static   int getMaxRownum(String fileName) throws Exception {
+        InputStream inputStream = new FileInputStream(fileName);
+        Workbook workbook=null;
+        if (fileName.endsWith(".xls")) {
+            workbook = new HSSFWorkbook(inputStream);
+        } else if (fileName.endsWith(".xlsx")) {
+            workbook = new XSSFWorkbook(inputStream);
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+
+        int rowsCount = sheet.getPhysicalNumberOfRows();
+
+        return rowsCount;
+    }
+
+    /**
+     * 获取最大列
+     * @param fileName
+     * @return
+     * @throws Exception
+     */
+    public static   int getMaxColnum(String fileName) throws Exception {
+        InputStream inputStream = new FileInputStream(fileName);
+        Workbook workbook=null;
+        if (fileName.endsWith(".xls")) {
+            workbook = new HSSFWorkbook(inputStream);
+        } else if (fileName.endsWith(".xlsx")) {
+            workbook = new XSSFWorkbook(inputStream);
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+         Row   row = sheet.getRow(0);
+        int colnum = row.getPhysicalNumberOfCells();
+        return colnum;
+    }
+
+
+
 
 }
